@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+      defaultZone: http://admin:admin@192.168.1.125:8761/eureka
   instance:
     prefer-ip-address: true # 但其他服务获取地址时提供ip而不是hostname
     ip-address: 127.0.0.1 # 指定自己的ip信息,不指定的话会自己寻找
@@ -51,3 +51,6 @@ swagger:
     name: Exrick
     url: http://blog.exrick.cn
     email: 1012139570@qq.com
+feign:
+  hystrix:
+    enabled: true

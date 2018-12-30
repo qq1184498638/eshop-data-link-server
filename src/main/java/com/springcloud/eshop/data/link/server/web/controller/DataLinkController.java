@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @Slf4j
@@ -22,10 +23,16 @@ public class DataLinkController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @ApiOperation("直连服务调用的接口")
     @GetMapping("/product")
     public String getProduct(String productId) {
         //TODO 这里可以先从ecache缓存中获取数据
+//        ServerResponse response = restTemplate.getForObject("http://192.168.1.125:8774?productId=" + productId, ServerResponse.class);
+//        return response.getData().toString();
+
         //1. 根据商品id获取数据
         log.info("直连服务调用的接口");
         Object obj = redisTemplate.get("eshop:dynamic:product:" + productId);
